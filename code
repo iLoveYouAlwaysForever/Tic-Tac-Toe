@@ -1,0 +1,54 @@
+cells = '         '
+matrix = [(cells[i:i+3]) for i in range(0, len(cells), 3)]
+
+print('---------')
+print('|', matrix[0][0], matrix[0][1], matrix[0][2], '|')
+print('|', matrix[1][0], matrix[1][1], matrix[1][2], '|')
+print('|', matrix[2][0], matrix[2][1], matrix[2][2], '|')
+print('---------')
+x_wins = 0
+o_wins = 0
+count = 1
+_isdigit = '0123456789'
+
+
+while True:
+    coordinates = input("Enter the coordinates: ")
+    _coor = coordinates. split(' ')
+    _x = _coor[0]
+    _y = _coor[1]
+    if coordinates[0] not in _isdigit or coordinates[2] not in _isdigit:
+        print('You should enter numbers!')      
+    elif (int(coordinates[0]) > 3 or int(coordinates[0]) < 1) or (int(coordinates[2]) > 3 or int(coordinates[2]) < 1): 
+        print('Coordinates should be from 1 to 3!') 
+    elif matrix[int(_x) - 1][int(_y) - 1] != ' ':
+        print('This cell is occupied! Choose another one!')  
+    else:
+        _xy = list(matrix[int(_x) - 1])
+        if count % 2 != 0:
+            _xy[int(_y) - 1] = 'X'
+        else:
+            _xy[int(_y) - 1] = 'O' 
+        matrix[int(_x) - 1] = ''.join(_xy)
+        print('---------')
+        print('|', matrix[0][0], matrix[0][1], matrix[0][2], '|')
+        print('|', matrix[1][0], matrix[1][1], matrix[1][2], '|')
+        print('|', matrix[2][0], matrix[2][1], matrix[2][2], '|')
+        print('---------')
+    if ((matrix[0][0] != ' ') and (matrix[0][0] == matrix[0][1]) and (matrix[0][1] == matrix[0][2]) and (matrix[0][0] == 'X')) or ((matrix[1][0] != ' ') and (matrix[1][0] == matrix[1][1]) and (matrix[1][1] == matrix[1][2]) and (matrix[1][0] == 'X')) or ((matrix[2][0] != ' ') and (matrix[2][0] == matrix[2][1]) and (matrix[2][1] == matrix[2][2]) and (matrix[2][0] == 'X')) or ((matrix[0][0] != ' ') and (matrix[0][0] == matrix[1][0]) and (matrix[1][0] == matrix[2][0]) and (matrix[0][0] == 'X')) or ((matrix[0][1] != ' ') and (matrix[0][1] == matrix[1][1]) and (matrix[1][1] == matrix[2][1]) and (matrix[0][1] == 'X')) or ((matrix[0][2] != ' ') and (matrix[0][2] == matrix[1][2]) and (matrix[1][2] == matrix[2][2]) and (matrix[0][2] == 'X')) or ((matrix[0][0] != ' ') and (matrix[0][0] == matrix[1][1]) and (matrix[1][1] == matrix[2][2]) and (matrix[0][0] == 'X')) or ((matrix[0][2] != ' ') and (matrix[0][2] == matrix[1][1]) and (matrix[1][1] == matrix[2][0]) and (matrix[0][2] == 'X')):
+        x_wins = 1
+    if ((matrix[0][0] != ' ') and (matrix[0][0] == matrix[0][1]) and (matrix[0][1] == matrix[0][2]) and (matrix[0][0] == 'O')) or ((matrix[1][0] != ' ') and (matrix[1][0] == matrix[1][1]) and (matrix[1][1] == matrix[1][2]) and (matrix[1][0] == 'O')) or ((matrix[2][0] != ' ') and (matrix[2][0] == matrix[2][1]) and (matrix[2][1] == matrix[2][2]) and (matrix[2][0] == 'O')) or ((matrix[0][0] != ' ') and (matrix[0][0] == matrix[1][0]) and (matrix[1][0] == matrix[2][0]) and (matrix[0][0] == 'O')) or ((matrix[0][1] != ' ') and (matrix[0][1] == matrix[1][1]) and (matrix[1][1] == matrix[2][1]) and (matrix[0][1] == 'O')) or ((matrix[0][2] != ' ') and (matrix[0][2] == matrix[1][2]) and (matrix[1][2] == matrix[2][2]) and (matrix[0][2] == 'O')) or ((matrix[0][0] != ' ') and (matrix[0][0] == matrix[1][1]) and (matrix[1][1] == matrix[2][2]) and (matrix[0][0] == 'O')) or ((matrix[0][2] != ' ') and (matrix[0][2] == matrix[1][1]) and (matrix[1][1] == matrix[2][0]) and (matrix[0][2] == 'O')):
+        o_wins = 2
+    if x_wins == 1 and o_wins != 2:
+        print('X wins')
+        break
+    elif o_wins == 2 and x_wins != 1:
+        print('O wins')
+        break
+    elif count == 10:
+        print('Draw')
+        break
+    count += 1
+    
+
+
